@@ -25,13 +25,13 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        [Authorize] // Give roles to this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        [Authorize] // Give roles to this ! ! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.Include(r => r.Role).ToListAsync(); //include
-        }
+        } 
 
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
