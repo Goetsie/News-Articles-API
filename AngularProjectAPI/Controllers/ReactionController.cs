@@ -35,9 +35,8 @@ namespace AngularProjectAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Reaction>> GetReaction(int id)
         {
-            //var article = await _context.Articles.FindAsync(id);
-            //var article = await _context.Articles.SingleOrDefaultAsync(i => i.ArticleID == id);
-            var reaction = await _context.Reactions.Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).SingleOrDefaultAsync(i => i.ArticleID == id);
+
+            var reaction = await _context.Reactions.Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).SingleOrDefaultAsync(i => i.ReactionID == id);
 
             if (reaction == null)
             {
@@ -48,7 +47,7 @@ namespace AngularProjectAPI.Controllers
         }
 
 
-        // PUT: api/Reaction/5  -- Edit reaction
+        // PUT: api/Reaction/5  -- Edit reaction ! ! ! !  ! ! ! ! ! ! !  ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! !
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -85,12 +84,8 @@ namespace AngularProjectAPI.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Reaction>> PosrReaction(Reaction reaction)
+        public async Task<ActionResult<Reaction>> PostReaction(Reaction reaction)
         {
-            //var user = await _context.Users.FindAsync(article.UserID);
-            //var tag = await _context.Tags.FindAsync(article.TagID);
-            //var articleStatus = await _context.ArticleStatuses.FindAsync(article.ArticleStatusID);
-
 
             reaction.User = await _context.Users.FindAsync(reaction.UserID);
             reaction.Article = await _context.Articles.FindAsync(reaction.ArticleID);
