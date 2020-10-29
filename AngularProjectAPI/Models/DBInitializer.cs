@@ -72,9 +72,20 @@ namespace AngularProjectAPI.Models
                 new Article { UserID = 3, Title = "Messi verlaat FC Barçelona 20", SubTitle = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ShortSummary = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ArticleStatusID = 1, TagID = 1, Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat non justo dignissim varius. Morbi finibus magna non neque bibendum efficitur. Aliquam eu auctor sem, ut mollis erat. Donec ornare dolor ex, tincidunt blandit purus sodales id. Phasellus a hendrerit libero. Nunc eu ultrices libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer consequat egestas dui sit amet dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sit amet cursus elit, eu dignissim elit. Ut aliquam cursus urna ultricies rhoncus. Proin vitae neque erat. Sed mollis consectetur diam eget vestibulum." },
                 new Article { UserID = 3, Title = "Messi verlaat FC Barçelona 21", SubTitle = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ShortSummary = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ArticleStatusID = 1, TagID = 1, Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat non justo dignissim varius. Morbi finibus magna non neque bibendum efficitur. Aliquam eu auctor sem, ut mollis erat. Donec ornare dolor ex, tincidunt blandit purus sodales id. Phasellus a hendrerit libero. Nunc eu ultrices libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer consequat egestas dui sit amet dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sit amet cursus elit, eu dignissim elit. Ut aliquam cursus urna ultricies rhoncus. Proin vitae neque erat. Sed mollis consectetur diam eget vestibulum." },
                 new Article { UserID = 3, Title = "Messi verlaat FC Barçelona 22", SubTitle = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ShortSummary = "Messi stuurde een fax met de boodschap dat hij wilt vertrekken.", ArticleStatusID = 1, TagID = 1, Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat non justo dignissim varius. Morbi finibus magna non neque bibendum efficitur. Aliquam eu auctor sem, ut mollis erat. Donec ornare dolor ex, tincidunt blandit purus sodales id. Phasellus a hendrerit libero. Nunc eu ultrices libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer consequat egestas dui sit amet dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sit amet cursus elit, eu dignissim elit. Ut aliquam cursus urna ultricies rhoncus. Proin vitae neque erat. Sed mollis consectetur diam eget vestibulum." }
-
                 );
             context.SaveChanges();
+
+            context.Reactions.AddRange(
+                new Reaction { UserID = 1, ArticleID = 1, Content = "Wat voor iets is me dees", Date = new DateTime(2020, 10, 29) },
+                new Reaction { UserID = 1, ArticleID = 1, Content = "Haha wa doet diene allemaal", Date = new DateTime(2020, 10, 29) },
+                new Reaction { UserID = 1, ArticleID = 2, Content = "Wat voor iets is me dees", Date = new DateTime(2020, 10, 20) },
+                new Reaction { UserID = 1, ArticleID = 2, Content = "Haha wa doet diene allemaal", Date = new DateTime(2020, 10, 11) },
+                new Reaction { UserID = 1, ArticleID = 3, Content = "Wat voor iets is me dees", Date = new DateTime(2020, 10, 25) },
+                new Reaction { UserID = 1, ArticleID = 3, Content = "Haha wa doet diene allemaal", Date = new DateTime(2020, 10, 29) },
+                new Reaction { UserID = 1, ArticleID = 4, Content = "Wat voor iets is me dees", Date = new DateTime(2020, 10, 29) }
+            );
+            context.SaveChanges();
+
         }
     }
 }
