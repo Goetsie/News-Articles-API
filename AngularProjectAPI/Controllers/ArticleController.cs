@@ -23,9 +23,17 @@ namespace AngularProjectAPI.Controllers
 
         // GET: api/Article
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
+        public async Task<ActionResult<IEnumerable<Article>>> GetArticles(int tagID)
         {
-            return await _context.Articles.Include(t => t.Tag).Include(u => u.User).Include(u => u.User.Role).Include(s => s.ArticleStatus).ToListAsync();
+            if (tagID != 0)
+            {
+                return await _context.Articles.Where(a => a.Tag.TagID == tagID).Include(t => t.Tag).Include(u => u.User).Include(u => u.User.Role).Include(s => s.ArticleStatus).ToListAsync();
+            }
+            else
+            {
+                // Return all articles
+                return await _context.Articles.Include(t => t.Tag).Include(u => u.User).Include(u => u.User.Role).Include(s => s.ArticleStatus).ToListAsync();
+            }
         }
 
         // GET: api/Article/5
@@ -43,6 +51,17 @@ namespace AngularProjectAPI.Controllers
 
             return article;
         }
+
+        //// GET: Article filter
+        ////[HttpGet("{id},{search}")]
+        //[HttpGet("{tagID}")]
+        //public async Task<ActionResult<IEnumerable<Article>>> FilterArticles(int tagID, string search)
+        //{
+        //    //var article = await _context.Articles.FindAsync(id);
+        //    //var article = await _context.Articles.SingleOrDefaultAsync(i => i.ArticleID == id);
+        //    return await _context.Articles.Where(a => a.Tag.TagID == tagID).Include(t => t.Tag).Include(u => u.User).Include(u => u.User.Role).Include(s => s.ArticleStatus).ToListAsync();
+        //}
+
 
         // PUT: api/Article/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
