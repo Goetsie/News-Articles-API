@@ -23,7 +23,8 @@ namespace AngularProjectAPI.Data
         public DbSet<ArticleStatus> ArticleStatuses { get; set; }
 
         public DbSet<Article> Articles { get; set; }
-        
+        public DbSet<Reaction> Reactions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +33,8 @@ namespace AngularProjectAPI.Data
             modelBuilder.Entity<Tag>().ToTable("Tag");
             modelBuilder.Entity<ArticleStatus>().ToTable("ArticleStatus");
             modelBuilder.Entity<Article>().ToTable("Article");
-            
+            modelBuilder.Entity<Reaction>().ToTable("Reaction");
+
         }
     }
 }
