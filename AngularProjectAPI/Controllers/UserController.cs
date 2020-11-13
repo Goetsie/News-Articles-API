@@ -31,7 +31,22 @@ namespace AngularProjectAPI.Controllers
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.Include(r => r.Role).ToListAsync(); //include
-        } 
+        }
+
+
+        // GET: api/User/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _context.Users.Include(r => r.Role).SingleOrDefaultAsync(i => i.UserID == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
 
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
