@@ -23,6 +23,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Reaction -- Get all reactions
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Reaction>>> GetReactions(int articleID)
         {
@@ -41,6 +42,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Reaction/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Reaction>> GetReaction(int id)
         {
@@ -60,6 +62,7 @@ namespace AngularProjectAPI.Controllers
         // PUT: api/Reaction/5  -- Edit reaction ! ! ! !  ! ! ! ! ! ! !  ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! !
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReaction(int id, Reaction reaction)
         {
@@ -110,6 +113,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // DELETE: api/Reaction/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Reaction>> DeleteReaction(int id)
         {
