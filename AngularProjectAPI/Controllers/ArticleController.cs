@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AngularProjectAPI.Data;
+using AngularProjectAPI.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AngularProjectAPI.Data;
-using AngularProjectAPI.Models;
 
 namespace AngularProjectAPI.Controllers
 {
@@ -79,12 +79,22 @@ namespace AngularProjectAPI.Controllers
         // POST: api/Article
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Article>> PostArticle(Article article)
         {
             //var user = await _context.Users.FindAsync(article.UserID);
             //var tag = await _context.Tags.FindAsync(article.TagID);
             //var articleStatus = await _context.ArticleStatuses.FindAsync(article.ArticleStatusID);
+
+            Console.WriteLine("Debugging add article");
+            Console.WriteLine("Title: " + article.Title);
+            Console.WriteLine("Subtitle: " + article.SubTitle);
+            Console.WriteLine("Short summary: " + article.ShortSummary);
+            Console.WriteLine("Body: " + article.Body);
+            Console.WriteLine("TagID: " + article.TagID);
+            Console.WriteLine("UserID: " + article.UserID);
+            Console.WriteLine("article status: " + article.ArticleStatusID);
 
 
             article.User = await _context.Users.FindAsync(article.UserID);
