@@ -31,7 +31,22 @@ namespace AngularProjectAPI.Controllers
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.Include(r => r.Role).ToListAsync(); //include
-        } 
+        }
+
+
+        // GET: api/User/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _context.Users.Include(r => r.Role).SingleOrDefaultAsync(i => i.UserID == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
 
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -56,6 +71,38 @@ namespace AngularProjectAPI.Controllers
             return Ok(user);
         }
 
+        // PUT: api/User/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(int id, User user)
+        {
+            if (id != user.UserID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
@@ -70,5 +117,12 @@ namespace AngularProjectAPI.Controllers
 
             return user;
         }
+
+
+        private bool UserExists(int id)
+        {
+            return _context.Users.Any(e => e.UserID == id);
+        }
+
     }
 }
