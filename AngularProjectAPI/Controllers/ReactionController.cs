@@ -39,6 +39,7 @@ namespace AngularProjectAPI.Controllers
         {
 
             var reaction = await _context.Reactions.Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).SingleOrDefaultAsync(i => i.ReactionID == id);
+            //var reaction = await _context.Reactions.SingleOrDefaultAsync(i => i.ReactionID == id);
 
             if (reaction == null)
             {
