@@ -91,6 +91,16 @@ namespace AngularProjectAPI.Models
             );
             context.SaveChanges();
 
+            context.Likes.AddRange(
+                new Like { UserID = 1, ArticleID = 1 },
+                new Like { UserID = 1, ArticleID = 2 },
+                new Like { UserID = 2, ArticleID = 3 },
+                new Like { UserID = 2, ArticleID = 5 },
+                new Like { UserID = 2, ArticleID = 6 },
+                new Like { UserID = 1, ArticleID = 4 }
+            );
+            context.SaveChanges();
+
         }
     }
 }

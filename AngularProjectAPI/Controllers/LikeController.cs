@@ -28,8 +28,8 @@ namespace AngularProjectAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Like>>> GetLikes()
         {
-            //return await _context.Likes.Include(u => u.User).Include(a => a.Article).ToListAsync();
-            return await _context.Likes.Include(u => u.User).ToListAsync();
+            return await _context.Likes.Include(u => u.User).Include(a => a.Article).ToListAsync();
+            //return await _context.Likes.Include(u => u.User).ToListAsync();
             //return await _context.Likes.ToListAsync();
 
         }
