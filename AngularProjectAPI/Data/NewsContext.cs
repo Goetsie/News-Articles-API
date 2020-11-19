@@ -24,6 +24,7 @@ namespace AngularProjectAPI.Data
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +35,7 @@ namespace AngularProjectAPI.Data
             modelBuilder.Entity<ArticleStatus>().ToTable("ArticleStatus");
             modelBuilder.Entity<Article>().ToTable("Article");
             modelBuilder.Entity<Reaction>().ToTable("Reaction");
+            modelBuilder.Entity<Like>().ToTable("Like");
 
         }
     }
