@@ -21,10 +21,11 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Article
+        // GET: api/Articles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
         {
+            // Return all articles
             return await _context.Articles.Include(t => t.Tag).Include(u => u.User).Include(u => u.User.Role).Include(s => s.ArticleStatus).ToListAsync();
         }
 
