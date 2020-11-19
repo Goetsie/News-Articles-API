@@ -26,8 +26,21 @@ namespace AngularProjectAPI.Controllers
         // GET: api/Like -- Get all likes
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Like>>> GetLikes()
+        public async Task<ActionResult<IEnumerable<Like>>> GetLikes(int articleID, int userID)
         {
+            //if (articleID != 0)
+            //{
+            //    // Find all the likes for an article
+            //    return await _context.Likes.Include(u => u.User).Include(a => a.Article).Where(l => l.ArticleID == articleID).ToListAsync();
+            //}else if(userID != 0)
+            //{
+            //    return await _context.Likes.Include(u => u.User).Include(a => a.Article).Where(l => l.UserID == userID).ToListAsync();
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+
             return await _context.Likes.Include(u => u.User).Include(a => a.Article).ToListAsync();
             //return await _context.Likes.Include(u => u.User).ToListAsync();
             //return await _context.Likes.ToListAsync();
