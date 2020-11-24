@@ -64,9 +64,11 @@ namespace AngularProjectAPI.Controllers
         public IActionResult Authenticate([FromBody]User userParam)
         {
             var user = _userService.Authenticate(userParam.Username, userParam.Password);
+            Console.WriteLine("User:", user);
 
-            if (user == null)
+            if (user == null) {
                 return BadRequest(new { message = "Username or password is incorrect" });
+            }
 
             return Ok(user);
         }

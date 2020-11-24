@@ -24,7 +24,6 @@ namespace AngularProjectAPI.Controllers
 
 
         // GET: api/Like -- Get all likes
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Like>>> GetLikes(int articleID, int userID)
         {
