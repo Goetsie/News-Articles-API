@@ -37,6 +37,16 @@ namespace AngularProjectAPI.Data
             modelBuilder.Entity<Reaction>().ToTable("Reaction");
             modelBuilder.Entity<Like>().ToTable("Like");
 
+            modelBuilder.Entity<Like>()
+               .HasOne(d => d.User)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Reaction>()
+               .HasOne(d => d.User)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }
