@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AngularProjectAPI.Data;
 using AngularProjectAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AngularProjectAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Tag
+        // (No Authorize --> guests need to obtain tag list)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
@@ -29,6 +31,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Tag/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
@@ -45,6 +48,7 @@ namespace AngularProjectAPI.Controllers
         // PUT: api/Tag/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTag(int id, Tag tag)
         {
@@ -77,6 +81,7 @@ namespace AngularProjectAPI.Controllers
         // POST: api/Tag
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
@@ -101,6 +106,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // DELETE: api/Tag/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> DeleteTag(int id)
         {

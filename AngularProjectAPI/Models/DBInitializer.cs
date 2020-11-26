@@ -25,7 +25,7 @@ namespace AngularProjectAPI.Models
               new Role { Name = "Admin" });
             context.SaveChanges();
 
-            
+
             context.Users.AddRange(
                 // Users
                 new User { UserID = 16, RoleID = 1, Username = "User", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" },
