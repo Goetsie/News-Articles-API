@@ -22,24 +22,11 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-
         // GET: api/Like -- Get all likes
-        [Authorize]
+        // (No Authorize --> total likes for guests)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Like>>> GetLikes(int articleID, int userID)
         {
-            //if (articleID != 0)
-            //{
-            //    // Find all the likes for an article
-            //    return await _context.Likes.Include(u => u.User).Include(a => a.Article).Where(l => l.ArticleID == articleID).ToListAsync();
-            //}else if(userID != 0)
-            //{
-            //    return await _context.Likes.Include(u => u.User).Include(a => a.Article).Where(l => l.UserID == userID).ToListAsync();
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
 
             return await _context.Likes.Include(u => u.User).Include(a => a.Article).ToListAsync();
             //return await _context.Likes.Include(u => u.User).ToListAsync();
@@ -55,13 +42,20 @@ namespace AngularProjectAPI.Controllers
         public async Task<ActionResult<Like>> PostLike(Like like)
         {
 
+            //Console.WriteLine("Like: " + like);
+            //Console.WriteLine(" ");
+            //Console.WriteLine("LikeId: " + like.LikeID);
+            //Console.WriteLine("UserID: " + like.UserID);
+            //Console.WriteLine("ArticleID: " + like.ArticleID);
+
             like.User = await _context.Users.FindAsync(like.UserID);
             like.Article = await _context.Articles.FindAsync(like.ArticleID);
 
             _context.Likes.Add(like);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLike", new { id = like.LikeID }, like);
+            //return CreatedAtAction("GetLike", new { id = like.LikeID }, like);
+            return Ok(like);
         }
 
         // DELETE: api/Like/5

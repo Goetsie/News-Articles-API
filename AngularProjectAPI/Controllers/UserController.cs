@@ -25,14 +25,13 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        [Authorize] // Give roles to this ! ! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.Include(r => r.Role).ToListAsync(); //include
         }
-
 
         // GET: api/User/5
         [HttpGet("{id}")]
@@ -48,6 +47,7 @@ namespace AngularProjectAPI.Controllers
             return user;
         }
 
+        // POST: api/User --> Add a new user
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -60,13 +60,16 @@ namespace AngularProjectAPI.Controllers
             return Ok(user);
         }
 
+        // Authenticate an user --> Log In user
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
             var user = _userService.Authenticate(userParam.Username, userParam.Password);
+            Console.WriteLine("User:", user);
 
-            if (user == null)
+            if (user == null) {
                 return BadRequest(new { message = "Username or password is incorrect" });
+            }
 
             return Ok(user);
         }
@@ -74,6 +77,7 @@ namespace AngularProjectAPI.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -103,6 +107,8 @@ namespace AngularProjectAPI.Controllers
             return NoContent();
         }
 
+        // DELETE: api/User/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
@@ -117,7 +123,6 @@ namespace AngularProjectAPI.Controllers
 
             return user;
         }
-
 
         private bool UserExists(int id)
         {

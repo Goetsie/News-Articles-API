@@ -88,15 +88,15 @@ namespace AngularProjectAPI.Controllers
             //var tag = await _context.Tags.FindAsync(article.TagID);
             //var articleStatus = await _context.ArticleStatuses.FindAsync(article.ArticleStatusID);
 
-            Console.WriteLine("Debugging add article");
-            Console.WriteLine("Title: " + article.Title);
-            Console.WriteLine("Subtitle: " + article.SubTitle);
-            Console.WriteLine("Short summary: " + article.ShortSummary);
-            Console.WriteLine("Body: " + article.Body);
-            Console.WriteLine("TagID: " + article.TagID);
-            Console.WriteLine("UserID: " + article.UserID);
-            Console.WriteLine("article status: " + article.ArticleStatusID);
-
+            // Dubug: 
+            //Console.WriteLine("Debugging add article");
+            //Console.WriteLine("Title: " + article.Title);
+            //Console.WriteLine("Subtitle: " + article.SubTitle);
+            //Console.WriteLine("Short summary: " + article.ShortSummary);
+            //Console.WriteLine("Body: " + article.Body);
+            //Console.WriteLine("TagID: " + article.TagID);
+            //Console.WriteLine("UserID: " + article.UserID);
+            //Console.WriteLine("article status: " + article.ArticleStatusID);
 
             article.User = await _context.Users.FindAsync(article.UserID);
             article.User.Role = await _context.Roles.FindAsync(article.User.UserID);
@@ -110,6 +110,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // DELETE: api/Article/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Article>> DeleteArticle(int id)
         {

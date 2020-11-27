@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AngularProjectAPI.Data;
 using AngularProjectAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AngularProjectAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Role
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
@@ -29,6 +31,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // GET: api/Role/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> GetRole(int id)
         {

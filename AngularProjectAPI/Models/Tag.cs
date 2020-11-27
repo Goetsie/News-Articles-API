@@ -11,6 +11,7 @@ namespace AngularProjectAPI.Models
     {
         public int TagID { get; set; }
         public string Name { get; set; }
+        public string Color { get; set; }
 
         //Relations
         [JsonIgnore]
