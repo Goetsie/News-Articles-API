@@ -25,10 +25,9 @@ namespace AngularProjectAPI.Models
               new Role { Name = "Admin" });
             context.SaveChanges();
 
-
             context.Users.AddRange(
                 // Users
-                new User { UserID = 16, RoleID = 1, Username = "User", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" },
+                new User { UserID = 16, RoleID = 1, Username = "User", Password = "test", FirstName = "Test", LastName = "User", Email = "test.user@thomasmore.be" },
                 new User { UserID = 15, RoleID = 1, Username = "Como", Password = "test", FirstName = "Connie", LastName = "Moeleker", Email = "conniemoeleker@gmail.com" },
                 new User { UserID = 14, RoleID = 1, Username = "Justcas", Password = "test", FirstName = "Justin", LastName = "Cas", Email = "justincas@hotmail.com" },
                 new User { UserID = 13, RoleID = 1, Username = "Jado", Password = "test", FirstName = "Jane", LastName = "Doe", Email = "janedoe@example.com" },
@@ -45,7 +44,7 @@ namespace AngularProjectAPI.Models
                 new User { UserID = 3, RoleID = 2, Username = "Arno_vgh", Password = "test", FirstName = "Arno", LastName = "Vangoetsenhoven", Email = "r0741327@student.thomasmore.be" },
                 new User { UserID = 2, RoleID = 2, Username = "Jhonyv", Password = "test", FirstName = "Jhony", LastName = "Voners", Email = "jhonnyvoners@hotmail.com" },
                 // Admin
-                new User { UserID = 1, RoleID = 3, Username = "Admin", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" }
+                new User { UserID = 1, RoleID = 3, Username = "Admin", Password = "test", FirstName = "Admin", LastName = "Admin", Email = "admin.admin@thomasmore.be" }
                 );
             context.Database.OpenConnection();
             try
@@ -58,7 +57,6 @@ namespace AngularProjectAPI.Models
             {
                 context.Database.CloseConnection();
             }
-
 
             context.Tags.AddRange(
                 //new Tag { TagID = 1, Name = "Sport", Color = "turquoise" },
@@ -95,7 +93,6 @@ namespace AngularProjectAPI.Models
             {
                 context.Database.CloseConnection();
             }
-
 
             Random rnd = new Random();
             context.Articles.AddRange(

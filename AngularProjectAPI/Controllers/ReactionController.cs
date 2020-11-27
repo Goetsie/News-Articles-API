@@ -80,7 +80,7 @@ namespace AngularProjectAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(true);
         }
 
         // POST: api/Reaction

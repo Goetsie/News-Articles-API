@@ -109,6 +109,7 @@ namespace AngularProjectAPI.Controllers
         }
 
         // DELETE: api/Article/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Article>> DeleteArticle(int id)
         {

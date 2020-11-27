@@ -42,13 +42,20 @@ namespace AngularProjectAPI.Controllers
         public async Task<ActionResult<Like>> PostLike(Like like)
         {
 
+            //Console.WriteLine("Like: " + like);
+            //Console.WriteLine(" ");
+            //Console.WriteLine("LikeId: " + like.LikeID);
+            //Console.WriteLine("UserID: " + like.UserID);
+            //Console.WriteLine("ArticleID: " + like.ArticleID);
+
             like.User = await _context.Users.FindAsync(like.UserID);
             like.Article = await _context.Articles.FindAsync(like.ArticleID);
 
             _context.Likes.Add(like);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLike", new { id = like.LikeID }, like);
+            //return CreatedAtAction("GetLike", new { id = like.LikeID }, like);
+            return Ok(like);
         }
 
         // DELETE: api/Like/5
