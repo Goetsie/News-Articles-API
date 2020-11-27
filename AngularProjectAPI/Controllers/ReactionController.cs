@@ -25,8 +25,17 @@ namespace AngularProjectAPI.Controllers
         // GET: api/Reaction -- Get all reactions
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reaction>>> GetReactions()
+        public async Task<ActionResult<IEnumerable<Reaction>>> GetReactions(int articleID)
         {
+            if (articleID != 0 && articleID!=null)
+            {
+                return await _context.Reactions.Where(r => r.ArticleID == articleID).Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).ToListAsync();
+            }
+            else
+            {
+                return await _context.Reactions.Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).ToListAsync();
+            }
+
             return await _context.Reactions.Include(u => u.User).Include(u => u.User.Role).Include(a => a.Article).Include(a => a.Article.ArticleStatus).ToListAsync();
             //return await _context.Reactions.ToListAsync();
 
@@ -86,18 +95,21 @@ namespace AngularProjectAPI.Controllers
         // POST: api/Reaction
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<ActionResult<Reaction>> PostReaction(Reaction reaction)
         {
 
-            reaction.User = await _context.Users.FindAsync(reaction.UserID);
-            reaction.Article = await _context.Articles.FindAsync(reaction.ArticleID);
+            reaction.Date.ToLocalTime();
+
+            //reaction.User = await _context.Users.FindAsync(reaction.UserID);
+            //reaction.Article = await _context.Articles.FindAsync(reaction.ArticleID);
 
             _context.Reactions.Add(reaction);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReaction", new { id = reaction.ReactionID }, reaction);
+            //return CreatedAtAction("GetReaction", new { id = reaction.ReactionID }, reaction);
+            return Ok(reaction);
         }
 
         // DELETE: api/Reaction/5
